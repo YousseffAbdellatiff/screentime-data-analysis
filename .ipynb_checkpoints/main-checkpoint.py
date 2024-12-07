@@ -27,20 +27,13 @@ else:
     st.warning("No numeric columns to visualize.")
 
 # Scatter plot of screen time and physical activity
-st.write("In the following graph, We will show the relation between the screen time hours and Sleep hours")
-sns.scatterplot(data=data, x="Screen_Time_Hours", y="Sleep_Hours", color="blue")
+st.write("In the following graph, We will show the relation between the screen time hours and physical activity hours")
+sns.scatterplot(data=data, x="Screen_Time_Hours", y="Physical_Activity_Hours", color="blue")
 st.pyplot(plt)
 
 # Display correlation between screen time and sleep hours
 correlation = data["Screen_Time_Hours"].corr(data["Sleep_Hours"])
 st.write(f"Correlation between Screen Time Hours and Sleep Hours: {correlation}")
-\
-
-
-
-
-
-
 
 # Now, show the relationship between 'Mental_Health_Status' and 'Screen_Time_Hours'
 st.write("### Relationship between Mental Health Status and Screen Time Hours")
