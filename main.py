@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import numpy as np
 
 st.set_page_config(page_title="Data Dashboard", page_icon="📊")
 
@@ -26,23 +27,16 @@ if not numeric_columns.empty:
 else:
     st.warning("No numeric columns to visualize.")
 
-# Scatter plot of screen time and physical activity
-st.write("In the following graph, We will show the relation between the screen time hours and Sleep hours")
+# Scatter plot of screen time and sleep hours
+st.write("### Relation Between Screen Time and Sleep Hours")
 sns.scatterplot(data=data, x="Screen_Time_Hours", y="Sleep_Hours", color="blue")
 st.pyplot(plt)
 
 # Display correlation between screen time and sleep hours
 correlation = data["Screen_Time_Hours"].corr(data["Sleep_Hours"])
 st.write(f"Correlation between Screen Time Hours and Sleep Hours: {correlation}")
-\
 
-
-
-
-
-
-
-# Now, show the relationship between 'Mental_Health_Status' and 'Screen_Time_Hours'
+# Relationship between 'Mental_Health_Status' and 'Screen_Time_Hours'
 st.write("### Relationship between Mental Health Status and Screen Time Hours")
 
 # Boxplot for screen time hours by mental health status
@@ -52,7 +46,7 @@ plt.xlabel("Mental Health Status")
 plt.ylabel("Screen Time Hours")
 st.pyplot(plt)
 
-# Alternatively, a violin plot to show distribution
+# Violin plot for distribution
 st.write("### Distribution of Screen Time Hours by Mental Health Status (Violin Plot)")
 sns.violinplot(x="Mental_Health_Status", y="Screen_Time_Hours", data=data, inner="quart")
 plt.title("Distribution of Screen Time Hours by Mental Health Status")
@@ -68,11 +62,6 @@ plt.title("Average Screen Time Hours by Mental Health Status")
 plt.xlabel("Mental Health Status")
 plt.ylabel("Average Screen Time Hours")
 st.pyplot(plt)
-
-print('yes')
-
-import numpy as np
-import pandas as pd
 
 # Function to generate fake data
 def generate_fake_data(num_samples):
@@ -97,7 +86,6 @@ def generate_fake_data(num_samples):
     return pd.DataFrame(fake_data)
 
 # Load original data
-# Update the file name to your actual file name and location
 original_data = pd.read_excel("data.xlsx")
 
 # Number of fake samples (25-50% of the original dataset size)
@@ -115,23 +103,7 @@ combined_data.to_excel("combined_data.xlsx", index=False, engine='openpyxl')
 print(f"Generated {num_fake_samples} fake records and combined them with the original dataset!")
 print("The combined dataset has been saved as 'combined_data.xlsx'.")
 
-import streamlit as st
-import pandas as pd
-
-# Load Excel data
-@st.cache
-def load_data(file_path):
-    return pd.read_excel(file_path)
-
-# File paths
-original_file = "data.xlsx"
-combined_file = "combined_data.xlsx"
-
-# Load the datasets
-original_data = load_data(original_file)
-combined_data = load_data(combined_file)
-
-# Streamlit App
+# Streamlit App for Analyzing Original and Combined Data
 st.title("Data Analysis: Original vs Combined Data")
 
 # Choose which dataset to analyze
