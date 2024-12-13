@@ -69,3 +69,38 @@ plt.xlabel("Mental Health Status")
 plt.ylabel("Average Screen Time Hours")
 st.pyplot(plt)
 
+# Function to generate fake data
+def generate_fake_data(num_samples):
+    fake_data = []
+    for _ in range(num_samples):
+        fake_data.append({
+            "User_ID": f"FAKE-{str(np.random.randint(10000, 99999))}",
+            "Age": np.random.randint(18, 60),  # Assume ages between 18 and 60
+            "Gender": np.random.choice(["Male", "Female"], p=[0.5, 0.5]),
+            "Technology_Usage_Hours": round(np.random.uniform(1, 10), 2),
+            "Social_Media_Usage_Hours": round(np.random.uniform(0.5, 8), 2),
+            "Gaming_Hours": round(np.random.uniform(0, 5), 2),
+            "Screen_Time_Hours": round(np.random.uniform(4, 15), 2),
+            "Mental_Health_Status": np.random.choice(["Excellent", "Good", "Fair", "Poor"]),
+            "Stress_Level": np.random.choice(["Low", "Medium", "High"], p=[0.4, 0.4, 0.2]),
+            "Sleep_Hours": round(np.random.uniform(4, 10), 2),
+            "Physical_Activity_Hours": round(np.random.uniform(0, 10), 2),
+            "Support_Systems_Access": np.random.choice(["Yes", "No"], p=[0.6, 0.4]),
+            "Work_Environment_Impact": np.random.choice(["Positive", "Negative"]),
+            "Online_Support_Usage": np.random.choice(["Yes", "No"], p=[0.3, 0.7]),
+        })
+    return pd.DataFrame(fake_data)
+    
+# Number of fake samples (25-50% of 1500)
+num_fake_samples = np.random.randint(375, 750)
+
+# Generate fake data
+fake_data_df = generate_fake_data(num_fake_samples)
+
+# Combine original and fake data
+combined_data = pd.concat([original_data, fake_data_df], ignore_index=True)
+
+# Save to a new file
+combined_data.to_csv("combined_data.csv", index=False)
+
+print(f"Generated {num_fake_samples} fake records and combined them with the original dataset!")
